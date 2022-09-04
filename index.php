@@ -1,7 +1,9 @@
+<h2>Step 2: Device Data Collection Iframe</h2>
+<hr/>
 <?php
 
 $payerAuththSetupReply_deviceDataCollectionURL = 'https://centinelapistag.cardinalcommerce.com/V1/Cruise/Collect';
-$payerAuthSetupReply_accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyNTk3ODE1Yi01MmIwLTQyYWYtOWU5MS0yMGYyZDAwMGVhMWMiLCJpYXQiOjE2NjIwMTAzNDUsImlzcyI6IjVkZDgzYmYwMGU0MjNkMTQ5OGRjYmFjYSIsImV4cCI6MTY2MjAxMzk0NSwiT3JnVW5pdElkIjoiNTVlZjNmMGNmNzIzYWE0MzFjOTliNDE1IiwiUmVmZXJlbmNlSWQiOiJlNmU2ZWZiNS02OWRkLTQxOTQtYTAzMy1lOWRmYWY3M2Y4OGYifQ.EZiyUIvM97yqGVW77ZffdifiTxBPjFD3EzI0gE4xC5o';
+$payerAuthSetupReply_accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNTFlODZkYS02YWM5LTQ3NzktOGZlNS02Yjk0YTQxMWY5NWYiLCJpYXQiOjE2NjIzMDk3NDcsImlzcyI6IjVkZDgzYmYwMGU0MjNkMTQ5OGRjYmFjYSIsImV4cCI6MTY2MjMxMzM0NywiT3JnVW5pdElkIjoiNTVlZjNmMGNmNzIzYWE0MzFjOTliNDE1IiwiUmVmZXJlbmNlSWQiOiI2OWM3ZDljNC1iYmFkLTRiZTctOTBhNS0yYmI5YTgwY2E1NTAifQ.v34B7aRzeAXbF_twgzXhsh3nbF81nlj9-A2t2tut8iQ';
 
 ?>
 <!DOCTYPE html>
@@ -20,6 +22,8 @@ $payerAuthSetupReply_accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGk
     <input id="cardinal_collection_form_input" type="hidden" name="JWT" value="<?= $payerAuthSetupReply_accessToken; ?>">
 </form>
 
+event.data: <code id="event_data"></code>
+
 </body>
 <script>
     window.onload = function() {
@@ -30,8 +34,13 @@ $payerAuthSetupReply_accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGk
     window.addEventListener('message', function(event) {
         if (event.origin === 'https://centinelapistag.cardinalcommerce.com') {
             console.log(event.data);
-            alert(event.data);
+            // alert(event.data);
+            let event_data = document.querySelector('#event_data');
+            event_data.innerHTML = event.data;
         }
     }, false);
+
+    document.querySelector('#event_data').innerHTML = "...";
+
 </script>
 </html>

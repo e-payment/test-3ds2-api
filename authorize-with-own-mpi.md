@@ -1,5 +1,7 @@
 ## Authorize with own MPI
 
+### Visa
+
 __Request__
 
 ```json
@@ -27,8 +29,8 @@ __Request__
 	},
 	"paymentInformation": {
 		"card": {
+            "type": "001",
 			"number": "4456530000001005",
-			"type": "001",
 			"expirationMonth": "01",
 			"expirationYear": 2023
 		}
@@ -168,5 +170,57 @@ __Response__
     },
     "status": "AUTHORIZED",
     "submitTimeUtc": "2022-09-01T05:47:15Z"
+}
+```
+
+---
+
+### Mastercard
+
+__Request__
+
+```json
+{
+	"clientReferenceInformation": {
+		"code": "{{$randomUUID}}"
+	},
+	"orderInformation": {
+		"amountDetails": {
+			"currency": "USD",
+			"totalAmount": "100"
+		},
+		"billTo": {
+			"address1": "901 metro center blvd",
+			"address2": "metro 3",
+			"administrativeArea": "CA",
+			"country": "US",
+			"locality": "san francisco",
+			"firstName": "John",
+			"lastName": "Doe",
+			"phoneNumber": "18007097779",
+			"postalCode": "94404",
+			"email": "email@email.com"
+		}
+	},
+	"paymentInformation": {
+		"card": {
+			"type": "002",
+            "number": "5200000000001005",
+			"expirationMonth": "12",
+			"expirationYear": "2025"
+		}
+	},
+	"buyerInformation": {
+		"mobilePhone": "1245789632"
+	},
+    "processingInformation": {
+		"ecommerceIndicator": "spa"
+    },
+	"consumerAuthenticationInformation": {
+        "ucafCollectionIndicator": "2",
+        "ucafAuthenticationData": "Y2FyZGluYWxjb21tZXJjZWF1dGg=",
+        "directoryServerTransactionId": "e704fb7c-4a57-41f8-80bb-6d83cecdec8b",
+        "paSpecificationVersion": "2.1.0"
+	}
 }
 ```
