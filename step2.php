@@ -1,9 +1,9 @@
-<h2>Step 2: Device Data Collection Iframe</h2>
-<hr/>
 <?php
 
-$payerAuththSetupReply_deviceDataCollectionURL = 'https://centinelapistag.cardinalcommerce.com/V1/Cruise/Collect';
-$payerAuthSetupReply_accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1NWJmMTUxNS1kMWRjLTRlOGUtODgxMS05MjBhNWNkMDlhOTUiLCJpYXQiOjE2NjQzMzg4MTAsImlzcyI6IjVkZDgzYmYwMGU0MjNkMTQ5OGRjYmFjYSIsImV4cCI6MTY2NDM0MjQxMCwiT3JnVW5pdElkIjoiNTVlZjNmMGNmNzIzYWE0MzFjOTliNDE1IiwiUmVmZXJlbmNlSWQiOiIyMjIxMzJkMC1mMmQxLTQ5NzEtYmEyZi02YjQ0NGQ5ZWU0MzgifQ.Z_u3ZKjS0j8p--9NcUMKp4ILgedgdm7yr-LP6WSp2vc';
+include_once('./config.php');
+
+$payerAuththSetupReply_deviceDataCollectionURL = $config[$config_env]['deviceDataCollectionURL'];
+$payerAuthSetupReply_accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZjRhYzMyNS03ODViLTQwNGYtODgyNS01YjI0YjRlNjJhNWUiLCJpYXQiOjE2NjU2OTM5MDcsImlzcyI6IjVkZDgzYmYwMGU0MjNkMTQ5OGRjYmFjYSIsImV4cCI6MTY2NTY5NzUwNywiT3JnVW5pdElkIjoiNTVlZjNmMGNmNzIzYWE0MzFjOTliNDE1IiwiUmVmZXJlbmNlSWQiOiJhMjc1YjZlZS1mOTk4LTQzYjQtYmMxMi05OTA0NGNjZDVmNjUifQ.MxlTtz5ZuwBR6yslhvWx-QKRxTEvKb8ECE8QSRfIsuU';
 
 ?>
 <!DOCTYPE html>
@@ -12,9 +12,12 @@ $payerAuthSetupReply_accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGk
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Step 2</title>
 </head>
 <body>
+
+<h2>Step 2: Device Data Collection Iframe</h2>
+<hr/>
 
 <iframe id="cardinal_collection_iframe" name="collectionIframe" height="10" width="10" style="display: none;"></iframe>
 
@@ -32,7 +35,7 @@ event.data: <pre id="event_data"></pre>
     }
 
     window.addEventListener('message', function(event) {
-        if (event.origin === 'https://centinelapistag.cardinalcommerce.com') {
+        if (event.origin === '<?php echo $config[$config_env]['cardinalCollectionFormOrigin'] ?>') {
             console.log(event.data);
             // alert(event.data);
             let event_data = document.querySelector('#event_data');
